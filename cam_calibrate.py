@@ -9,6 +9,13 @@ import os
 import glob
 import cv2
 
+'''
+This file caliberates the camera matrix
+and saves as pickle with name PICKLE_NAME
+in folder CALIBRATION_IMAGES_FOLDER
+'''
+
+
 CALIBRATION_IMAGES_FOLDER = 'camera_cal'
 PICKLE_NAME = 'wide_dist_pickle.p'
 
@@ -60,9 +67,8 @@ def get_points(folder_name='camera_cal', files_name='calibration*.jpg', display=
     print('objpoints and imgpoints calculated')
     return (objpoints, imgpoints)
 
+
 # Call this method from other classes to save the pickle
-
-
 def get_calibration():
     # Get objpoints and imgpoints from above code
     objpoints, imgpoints = get_points(folder_name=CALIBRATION_IMAGES_FOLDER)
@@ -84,9 +90,8 @@ def get_calibration():
     print('Pickle of mtx and dist matrix dumped at : ' + CALIBRATION_IMAGES_FOLDER
           + '/' + PICKLE_NAME)
 
+
 # Call this method to un-distort the sample images
-
-
 def undistort_sample_images(visualise=False):
     # Get points
     objpoints, imgpoints = get_points(folder_name=CALIBRATION_IMAGES_FOLDER)
@@ -115,6 +120,7 @@ def undistort_sample_images(visualise=False):
             ax2.imshow(dst)
             ax2.set_title('Undistorted Image', fontsize=30)
     print('Images Undistorted')
+
 
 if __name__ == '__main__':
     undistort_sample_images(visualise=False)
